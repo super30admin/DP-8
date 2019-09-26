@@ -22,4 +22,18 @@ public class Triangle {
 	        }
 	        return dp[0];
 	    }
+	    
+	    // constant space dp
+	    public int minimumTotal2(List<List<Integer>> triangle) {
+	        int rows = triangle.size();
+	        int sum =0;
+	        for(int i = rows -2; i>=0 ; i--){
+	            for(int j=0; j<=i;j++){
+	                List<Integer> list = triangle.get(i+1);
+	                sum = Math.min(list.get(j),list.get(j+1)) + triangle.get(i).get(j);
+	                triangle.get(i).set(j,sum);
+	            }
+	        }
+	        return triangle.get(0).get(0);
+	    }
 }

@@ -35,6 +35,27 @@ public class ArithmaticSlices {
 	        }
 	        return sum;
 	    }
+	    
+	    //recursion
+	    
+	    int slices = 0;
+	    
+	    public int numberOfArithmeticSlicesRecursion(int[] A) {
+	        helper(A, A.length-1);
+	        return slices;
+	    }
+	    
+	    public int helper(int[] A, int index){
+	        if(index<2) return 0;
+	        int temp  = 0;
+	        if(A[index] - A[index-1] == A[index-1] - A[index-2]){
+	            temp = 1+ helper(A, index-1);
+	            slices+=temp;
+	        }else{
+	            helper(A, index-1);
+	        }
+	        return temp;
+	    }
 
 	    	   // with o(n) space dp
 	        public int numberOfArithmeticSlicesDP2(int[] A) {
