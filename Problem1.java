@@ -52,6 +52,8 @@ class Solution {
          if(A[i] - A[i-1] == A[i-1] - A[i-2] ){
             prev = prev+1;
              slices += prev;
+         }else{
+             prev =0;  // missed in first attempt
          }
      }   
      return slices;   
