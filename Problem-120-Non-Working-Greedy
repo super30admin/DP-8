@@ -1,0 +1,35 @@
+
+// Approach: this is a greedy approach that does not work.
+//  Could not come up with a dp solution.
+class Solution {
+    public int minimumTotal(List<List<Integer>> triangle) {
+        
+        int result=0;
+        int lastindex=0;
+        int temp1=0;
+        for(int i=0;i<triangle.size();i++)
+        {
+            int min=Integer.MAX_VALUE;
+            for(int j=lastindex;j<=lastindex+1;j++)
+            {
+                if(j>=0&&j<triangle.get(i).size())
+                {
+                    int temp=triangle.get(i).get(j);
+                    if(temp<min)
+                    {
+                        min=temp;
+                        temp1=j;
+                
+                    }
+                    
+                 }
+            }
+        
+            lastindex=temp1;
+            System.out.println(min);
+            result+=min;
+        }
+        return result;
+        
+    }
+} 
