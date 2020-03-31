@@ -1,6 +1,6 @@
 # DP-8
 
-## Problem1 Arithmetic Slices (https://leetcode.com/problems/arithmetic-slices/)
+## Problem150 Arithmetic Slices (https://leetcode.com/problems/arithmetic-slices/)
 A sequence of number is called arithmetic if it consists of at least three elements and if the difference between any two consecutive elements is the same.
 
 For example, these are arithmetic sequence:
@@ -30,7 +30,7 @@ A = [1, 2, 3, 4]
 
 return: 3, for 3 arithmetic slices in A: [1, 2, 3], [2, 3, 4] and [1, 2, 3, 4] itself.
 
-## Problem 2 Triangle (https://leetcode.com/problems/triangle/)
+## Problem151 Triangle (https://leetcode.com/problems/triangle/)
 
 Given a triangle, find the minimum path sum from top to bottom. Each step you may move to adjacent numbers on the row below.
 
