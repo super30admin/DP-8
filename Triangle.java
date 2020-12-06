@@ -1,46 +1,31 @@
-// Time Complexity : O(mn)
-// Space Complexity : O(mn)
+// Time Complexity : O(#elements in triangle)
+// Space Complexity : O(#elements in last row in triangle)
 // Did this code successfully run on Leetcode : yes
 // Any problem you faced while coding this : no
 
 // Your code here along with comments explaining your approach
-// maintain dp arraylist of same size as triangle, min path sum to get to last row is min over items in row (cost to get to that element)
-// dp[i][j] = min(dp[i-1][j-1], dp[i-1][j])
-// minCost = min(dp[last row][:])
+//build from bottom up, dp[i] = min(dp[i], dp[i+1]) + triangle[row][i]
+//final min sum would be in dp[0]
 
 class Solution {
     public int minimumTotal(List<List<Integer>> triangle) {
+        if(triangle.size()==0)
+            return 0;
+        if(triangle.size()==1)
+            return triangle.get(0).get(0);
         
-        List<ArrayList<Integer>> dp = new ArrayList<ArrayList<Integer>>();
+        int[] dp = new int[triangle.size()];
         
-        for(List<Integer> row : triangle){
-            ArrayList<Integer> r = new ArrayList<Integer>(Collections.nCopies(row.size(), 0));
-            dp.add(r);   
+        for(int i=0; i<triangle.size(); i++){
+            dp[i] = triangle.get(triangle.size()-1).get(i);
         }
         
-        dp.get(0).set(0, triangle.get(0).get(0));
-        
-        for(int i=1; i<dp.size(); i++){
-            for(int j=0; j<dp.get(i).size(); j++){
-                int l = Integer.MAX_VALUE;
-                int r = Integer.MAX_VALUE;
-                if(j-1>=0)
-                    l = dp.get(i-1).get(j-1);
-            
-                if(j<dp.get(i-1).size())
-                    r = dp.get(i-1).get(j);
-                
-                int val = Math.min(l, r) + triangle.get(i).get(j);
-                dp.get(i).set(j, val);    
+        for(int row = triangle.size()-2; row>=0; row--){
+            for(int col = 0; col<=row; col++){
+                dp[col] = Math.min(dp[col], dp[col+1]) + triangle.get(row).get(col);
             }
         }
         
-        int min = Integer.MAX_VALUE;
-        
-        for(int i=0; i<dp.get(dp.size()-1).size(); i++){
-            min = Math.min(dp.get(dp.size()-1).get(i), min);
-        }
-        
-        return min;
-    } 
+        return dp[0];
+    }
 }
