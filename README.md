@@ -1,4 +1,4 @@
-# DP-8
+# DP-8 https://youtu.be/4NgjRb2NZ1Y
 
 ## Problem1 Arithmetic Slices (https://leetcode.com/problems/arithmetic-slices/)
 
