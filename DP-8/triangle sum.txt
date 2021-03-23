@@ -1,0 +1,37 @@
+// solution executed on leetcode
+// runtime = O(m*m_size)// m=no of lists, m_size=size of that list
+//space complexity = constant
+class Solution {
+    public int minimumTotal(List<List<Integer>> triangle) {
+        List<Integer> prev=null;// to store the previous list
+        int count=0;
+      for(List<Integer> li: triangle)// iterate through all lists
+      {
+          if(count==0)
+          {
+              count++;
+              prev=li;
+          }
+          else
+          {
+                for(int i=0;i<li.size();i++)
+                {
+                    if(i==0)// if first element then just add current to prev first
+                    {
+                        li.set(i,li.get(i)+prev.get(i));
+                    }
+                    else if(i==li.size()-1)// if last just add curr to prev last
+                    {
+                        li.set(i,li.get(i)+prev.get(prev.size()-1));
+                    }
+                    else // add current to prev of minimum of (i,i-1)
+                    {
+                        li.set(i,li.get(i)+Math.min(prev.get(i),prev.get(i-1)));
+                    }
+                }
+              prev=li;
+          }
+      }
+        return Collections.min(triangle.get(triangle.size()-1));// minimum of last list
+    }
+}
