@@ -1,0 +1,72 @@
+/*************
+Time O(n^2)  n = no of lists 
+SPace O(n^2)
+Leetcode yes
+Problem no
+*************/
+class Solution {
+    public int minimumTotal(List<List<Integer>> triangle) {
+        
+        int[][] arr = new int[triangle.size()][triangle.size()];
+        int i=0 , j =0;
+        
+        // Making 2 d array from lists
+        for(List<Integer> l : triangle)
+        {
+            for(Integer num : l)
+            {
+                arr[i][j] = num;
+                j++;
+            }
+           i++;
+           j=0;
+        }
+        
+        int temp =0;
+        
+        //filling all 0 values of each with the last non negative element of that row(to prevent taking 0 value as minimum while
+        //calculating dp array values
+         for(i =0; i<arr.length; i++)
+        {
+             for(j =0; j< arr.length;j++)
+             {
+                 if(i == j)
+                     temp = arr[i][j];
+                 if(j>i)
+                     arr[i][j] = temp;
+             }
+        }
+        
+        int[][] dp = new int[triangle.size()][triangle.size()];
+        
+        // Initialising first row of dp array to same as arr array
+        for(j =0 ; j< arr.length;j++)
+            dp[0][j] = arr[0][j];
+        
+        
+        // at every element we store min sum at that element
+        for(i=1; i< arr.length; i++)
+        {
+             for(j=0; j< arr.length; j++)
+             {   
+                     if(j==0)
+                          dp[i][j] = dp[i-1][j] + arr[i][j];
+                     else
+                        dp[i][j] = Math.min(dp[i-1][j],dp[i-1][j-1]) + arr[i][j];
+             }
+        }   
+        
+        
+        // We need to simply find minimum element from last row
+        int minSum = Integer.MAX_VALUE;
+        
+        for(i=arr.length-1;i< arr.length;i++)
+        {
+            for(j=0;j<arr.length;j++)
+            {
+                minSum = Math.min(minSum, dp[i][j]);
+            }
+        }
+        return minSum;
+    }
+}
