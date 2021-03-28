@@ -1,0 +1,35 @@
+class Solution:
+    
+    def fun(self, A, idx, result, dp):
+        if(idx < 2):
+            return 0;
+        if(dp[idx] != -1):
+            return dp[idx];
+        res = 0;
+        if( (A[idx ] - A[idx - 1]) == (A[idx-1] - A[idx -2])):
+            res = 1 + self.fun(A, idx - 1, result,dp);
+            result[0] += res
+        else:
+            self.fun(A, idx - 1,result, dp);
+        dp[idx] = result[0];
+        return res;
+            
+    
+    def numberOfArithmeticSlices(self, A: List[int]) -> int:
+        n = len(A) - 1
+        result = [0]
+        dp = [0 for i in range(n+1)];
+        count = 0;
+        
+        for i in range(2, n+1):
+            if(A[i] - A[i-1] == A[i-1] - A[i-2]):
+                dp[i] = dp[i-1] + 1;
+                count += dp[i];
+        return count;
+        
+        
+        '''
+        time complexity = O(n)
+        space complexity = O(n)
+        
+        '''
