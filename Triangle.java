@@ -1,7 +1,8 @@
 class Triangle {
     
     // Time Complexity: O(n^2)
-    // Space Complexity: O(1)
+    // Space Complexity: O(1)   (for top-down)
+    // Space Complexity: O(n)   (for bottom-up) (where n -> max number of columns in the triangle)
     
     public int minimumTotal(List<List<Integer>> triangle) {
         if(triangle == null || triangle.size() == 0 || triangle.get(0) == null || triangle.get(0).size() == 0)
