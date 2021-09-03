@@ -1,3 +1,6 @@
+// Time Complexity : O(m * n)
+// Space Complexity : O(1)
+
 class Solution {
     public int minimumTotal(List<List<Integer>> triangle) {
         if(triangle == null || triangle.size() == 0 || triangle.get(0).size() == 0)
