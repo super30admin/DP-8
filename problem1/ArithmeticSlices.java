@@ -1,5 +1,5 @@
 // Time Complexity : O(n), n -> Number of elements in the array
-// Space Complexity : O(n)
+// Space Complexity : O(1)
 // Did this code successfully run on Leetcode : Yes
 // Any problem you faced while coding this : No
 package problem1;
@@ -10,7 +10,7 @@ public class ArithmeticSlices {
 	// Space Complexity : O(n)
 	// Did this code successfully run on Leetcode : Yes
 	// Any problem you faced while coding this : No
-	public int numberOfArithmeticSlices(int[] nums) {
+	public int numberOfArithmeticSlicesBottomUp(int[] nums) {
 		if (nums == null || nums.length < 3) {
 			return 0;
 		}
@@ -48,6 +48,34 @@ public class ArithmeticSlices {
 				dp[i] = dp[i - 1] + 1;
 			}
 			sum += dp[i];
+		}
+
+		return sum;
+	}
+
+	/********************* DP - Top-Down Optimized Space *********************/
+	// Time Complexity : O(n), n -> Number of elements in the array
+	// Space Complexity : O(1)
+	// Did this code successfully run on Leetcode : Yes
+	// Any problem you faced while coding this : No
+	public int numberOfArithmeticSlices(int[] nums) {
+		if (nums == null || nums.length < 3) {
+			return 0;
+		}
+
+		int n = nums.length;
+		int curr = 0;
+		int prev = 0;
+		int sum = 0;
+
+		for (int i = 2; i < n; i++) {
+			if (nums[i] - nums[i - 1] == nums[i - 1] - nums[i - 2]) {
+				curr = prev + 1;
+				prev = curr;
+				sum += curr;
+			} else {
+				prev = 0;
+			}
 		}
 
 		return sum;
