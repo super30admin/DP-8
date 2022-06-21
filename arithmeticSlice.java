@@ -48,6 +48,7 @@ class Solution {
         }
         
         int slices = 0;
+        // Can calculate slices after line 46 to avoid this for loop
         for (int i = 0; i < n; ++i)
             slices += dp[i];
         return slices;
