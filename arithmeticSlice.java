@@ -31,6 +31,7 @@ class Solution {
 
 // Approach 2: more efficient
 // TC: O(n)
+// SC: O(n)
 class Solution {
     public int numberOfArithmeticSlices(int[] nums) {
         if (nums == null || nums.length == 0) {
@@ -51,6 +52,30 @@ class Solution {
         // Can calculate slices after line 46 to avoid this for loop
         for (int i = 0; i < n; ++i)
             slices += dp[i];
+        return slices;
+    }
+}
+
+// Approach 3: Space efficient
+// TC: O(n), SC: O(1)
+class Solution {
+    public int numberOfArithmeticSlices(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        
+        int n = nums.length;
+        int prevSlices = 0;
+        int slices = 0;
+        
+        for (int i = 2; i < n;++i) {
+            if (nums[i] - nums[i-1] == nums[i-1] - nums[i-2]) {
+                prevSlices = prevSlices + 1;
+            } else {
+                prevSlices = 0;
+            }
+            slices += prevSlices;
+        }
         return slices;
     }
 }
