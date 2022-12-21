@@ -34,7 +34,10 @@ public class Triangle {
 
 /*
  * Approach 2 - Bottom Up DP (tabulation) - while mutating the existing data structure
+ * Time Complexity - O(n)
+ * Space Complexity - O(1)
  */
+
 class Solution {
     public int minimumTotal(List<List<Integer>> triangle) {
         int n = triangle.size();
@@ -53,6 +56,8 @@ class Solution {
 
 /*
  * Approach 3 - Using an extra DP array
+ * Time Complexity - O(n)
+ * Space Complexity - O(n*n)
  */
 class Solution {
     public int minimumTotal(List<List<Integer>> triangle) {
@@ -78,6 +83,8 @@ class Solution {
 
 /*
  * Approach 4 - Using single array instead of using a matrix
+ * Time Complexity - O(n)
+ * Space Complexity - O(n)
  */
 class Solution {
     public int minimumTotal(List<List<Integer>> triangle) {
