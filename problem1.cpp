@@ -45,3 +45,25 @@ public:
 
 // DP solution 
 
+class Solution {
+public:
+    int numberOfArithmeticSlices(vector<int>& nums) {
+        int sz = nums.size();
+        if(sz<3) return 0;
+        vector<int> dp_arr(sz,0);
+        int curr_diff = nums.at(sz-2)-nums.at(sz-1);
+        int i{sz-3};
+        for(int i{sz-3};i>=0;--i){
+            int new_diff = nums.at(i) - nums.at(i+1);
+            if(new_diff == curr_diff){
+                dp_arr.at(i) = dp_arr.at(i+1)+1;
+            }
+            else{
+                curr_diff = new_diff;
+            }
+        }
+        int sums{};
+        for(int& i:dp_arr) sums +=i;
+        return sums;
+    }
+};
