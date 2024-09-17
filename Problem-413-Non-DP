@@ -1,0 +1,53 @@
+/*
+NON-DP approach. Could not think of a DP solution.
+Time Complexity: O(n)
+Space Complexity: O(1)
+
+Leetcode: Successful
+
+Approach:
+
+tried to use simple maths.
+
+noticed that when there is a consecutive sequence the number of combinations would be.
+
+(n-2) + (n-3) + (n-4) + .... + 1
+where n is the length of the sequence.
+
+tried to find the legth of such sequences and add it to the result.
+*/
+
+class Solution {
+    public int numberOfArithmeticSlices(int[] A) {
+        
+        int temp=0;
+        int result=0;
+        for(int i=0;i<A.length;i++)
+        {
+            if(i>1&&A[i]-A[i-1]==A[i-1]-A[i-2])
+            {
+                temp++;
+            }
+            else{
+
+                for(int j=1;j<=temp;j++)
+                {
+                    result+=j;
+                    
+                }
+                temp=0;
+            }
+        }
+        
+        
+        if(temp!=0)
+                for(int j=1;j<=temp;j++)
+                {
+                    result+=j;
+                }
+      
+        
+        
+        return result;
+    }
+}
