@@ -1,0 +1,24 @@
+time;O(n^2)
+space;O(1)
+
+
+
+
+class Solution {
+    public int minimumTotal(List<List<Integer>> triangle) {
+        int n = triangle.size(); // Get the size of the triangle
+        
+        // Start from the second last row and move upwards
+        for (int i = n - 2; i >= 0; i--) {
+            for (int j = 0; j < triangle.get(i).size(); j++) {
+                // Find the minimum path sum of the adjacent numbers in the row below
+                int currMin = Math.min(triangle.get(i + 1).get(j), triangle.get(i + 1).get(j + 1));
+                // Update the current value with the minimum path sum
+                triangle.get(i).set(j, triangle.get(i).get(j) + currMin);
+            }
+        }
+        
+        // The top element of the triangle contains the minimum path sum
+        return triangle.get(0).get(0);
+    }
+}

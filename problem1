@@ -1,0 +1,25 @@
+time; O(n)
+space; O(n)
+
+class Solution {
+    public int numberOfArithmeticSlices(int[] nums) {
+        int result = 0;
+        int n = nums.length;
+        
+        // Edge case: if there are less than 3 elements, no arithmetic slice is possible
+        if (n < 3) return 0;
+        
+        int[] dp = new int[n];
+        
+        // Iterate from the third last element to the beginning of the array
+        for (int i = n - 3; i >= 0; i--) {
+            // Check if the current slice forms an arithmetic sequence
+            if (nums[i + 2] - nums[i + 1] == nums[i + 1] - nums[i]) {
+                dp[i] = dp[i + 1] + 1;
+                result += dp[i];
+            }
+        }
+        
+        return result;
+    }
+}
