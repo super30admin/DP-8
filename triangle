@@ -1,0 +1,56 @@
+// Time Complexity :O(n^2)
+// Space Complexity :O(n^2)
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+// Your code here along with comments explaining your approach:
+
+class Solution {
+    public int minimumTotal(List<List<Integer>> triangle) {
+        int n = triangle.size(); //size of list
+        return helper(triangle, 0, 0);//recurssion
+    }
+    public int helper(List<List<Integer>> triangle, int row, int col) {
+        //base
+        if (row == triangle.size()) {
+            return 0;
+        }
+        //logic
+       int left = helper(triangle, row + 1, col); //min path for left sub tree
+       int right = helper(triangle, row + 1, col + 1);//min path for right sub tree
+        return Math.min(left, right) + triangle.get(row).get(col);//min between let, right and current 
+    }
+}
+
+
+// Time Complexity :O(n*n)
+// Space Complexity :O(n*n)
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+// Your code here along with comments explaining your approach:
+
+class Solution {
+    public int minimumTotal(List<List<Integer>> triangle) {
+        int n = triangle.size(); //size of list
+        int[][] memo = new int[n][n];//memoization array to avoid processing for repeated sub problemns
+        for(int i=0;i<memo.length;i++){
+ Arrays.fill(memo[i], Integer.MIN_VALUE);//filling with int.min because input can contain negative and zeros as well
+        }
+        return helper(triangle, 0, 0,memo);//recurssion
+    }
+
+    public int helper(List<List<Integer>> triangle, int row, int col,int[][] memo) {
+        //base
+        if (row == triangle.size()) {
+            return 0;
+        }
+        if (memo[row][col] != Integer.MIN_VALUE) {//i laready processed just stroing the res
+            return memo[row][col];
+        }
+        //logic
+        int left = helper(triangle, row + 1, col,memo); //min path for left sub tree
+        int right = helper(triangle, row + 1, col + 1,memo);//min path for right sub tree
+        int res = Math.min(left, right) + triangle.get(row).get(col);//min between let, right and current 
+        memo[row][col] = res; //(storing result to avoid repeated subproblem processing)
+        return res;
+    }
+}

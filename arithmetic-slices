@@ -1,0 +1,101 @@
+// Time Complexity :O(n*n)
+// Space Complexity :O(1)
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+// Your code here along with comments explaining your approach:bruete force approach
+class Solution {
+    public int numberOfArithmeticSlices(int[] nums) {
+        int n = nums.length;
+        int count = 0;
+        for (int i = 0; i < n - 2; i++) {
+            for (int j = i + 2; j < n; j++) {
+                int diff = nums[i + 1] - nums[i];
+                if (nums[j] - nums[j - 1] == diff) {
+                    count++;
+                } else {
+                    break;
+                }
+            }
+        }
+         return count;
+    }
+   
+}
+
+
+
+// Time Complexity :O(n*n)
+// Space Complexity :O(1)
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+// Your code here along with comments explaining your approach:1d array dp approachas we haev seen reapted subrpoblems
+
+class Solution {
+    public int numberOfArithmeticSlices(int[] nums) {
+        int n = nums.length;
+        int count = 0;
+        int[] dp = new int[n];
+        for (int i = n - 3; i >= 0; i--) {
+            int diff = nums[i + 1] - nums[i];
+            if (nums[i + 2] - nums[i + 1] == diff) {
+               dp[i] = dp[i+1]+1;
+            }
+            count+=dp[i];
+        }
+        return count;
+    }
+
+}
+
+// Time Complexity :O(n)
+// Space Complexity :O(1)
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+// Your code here along with comments explaining your approach: dp approache backward but not using any space we heve seen reapted subrpoblems
+
+class Solution {
+    public int numberOfArithmeticSlices(int[] nums) {
+        int n = nums.length;
+        int count = 0;
+        int right=0;
+        int curr=0;
+        int[] dp = new int[n];
+        for (int i = n - 3; i >= 0; i--) {
+            int diff = nums[i + 1] - nums[i];
+            if (nums[i + 2] - nums[i + 1] == diff) {
+               curr = right+1;
+            }
+            right=curr;//updating right as curr
+            count+=curr;
+        }
+        return count;
+    }
+
+}
+
+// Time Complexity :O(n)
+// Space Complexity :O(1)
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+// Your code here along with comments explaining your approach:dp approache forward but not using any space we heve seen reapted subrpoblems
+class Solution {
+    public int numberOfArithmeticSlices(int[] nums) {
+        int n = nums.length;
+        int count = 0;
+        int left=0;
+        int curr=0;
+        int[] dp = new int[n];
+        for (int i = 0; i < n-2; i++) {
+            int diff = nums[i + 1] - nums[i];
+            if (nums[i + 2] - nums[i + 1] == diff) {
+               curr = left+1;
+            }else{
+                curr=0;
+            }
+            left=curr;
+            count+=curr;
+        }
+        return count;
+    }
+
+}
