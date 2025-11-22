@@ -1,0 +1,19 @@
+// Time Complexity: O(n^2)
+// Space Complexity: O(1)
+
+// Iterate from the second last row of the triangle for each value update it to the min of the sum of current and the next 2 values in the bottom row
+// The first element in the triangle will give the min path sum
+
+class Solution {
+    public int minimumTotal(List<List<Integer>> triangle) {
+        int n = triangle.size();
+        for(int i = n-2; i >= 0; i--) {
+            for(int j = 0; j <= i; j++) {
+                // Update to sum of current + min of 2 values in the next row
+                triangle.get(i).set(j, triangle.get(i).get(j) + Math.min(triangle.get(i+1).get(j), triangle.get(i+1).get(j+1)));
+
+            }
+        }
+        return triangle.get(0).get(0);
+    }
+}
